@@ -134,3 +134,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # ключ для хранения корзины в сессии пользователя
 CART_SESSION_ID = 'cart'
+
+# для создания блока новостей
+
+DIRS = os.path.join(BASE_DIR, "templates")

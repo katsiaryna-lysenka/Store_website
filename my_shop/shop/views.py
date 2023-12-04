@@ -1,6 +1,19 @@
 from django.shortcuts import render, get_object_or_404
+from newsapi.newsapi_client import NewsApiClient
+
 from .models import Category, Product, Comment
 from cart.forms import CartAddProductForm, CommentForm
+
+#для регистрации
+from django.views.generic import CreateView
+from django.urls import reverse_lazy
+from django.contrib.messages.views import SuccessMessageMixin
+from .forms import UserRegisterForm, UserLoginForm
+
+
+#для авторизации и деавторизации
+
+from django.contrib.auth.views import LoginView, LogoutView
 
 
 def product_list(request, category_slug=None):
@@ -47,5 +60,69 @@ def product_detail(request, id, slug):
                   'comments': comments,
                   'comment_form': comment_form})
 
+#Переделала для создания новостного блога
+
+
+def news(request):
+    newsapi = NewsApiClient(api_key='4399405a879a4684a406a6815b50d7ea')
+    top = newsapi.get_top_headlines(language='en')
+
+    articles = top['articles']
+    mylist = []
+
+    for article in articles:
+        title = article['title']
+        description = article['description']
+        image_url = article['urlToImage']
+        published_at = article['publishedAt']
+        mylist.append((title, description, image_url, published_at))
+
+    if len(mylist) == 0:
+        return render(request, 'news.html', context={"error": "No news found."})
+    else:
+        return render(request, 'news.html', context={"mylist": mylist})
+
+
+#для регистрации
+
+class UserRegisterView(SuccessMessageMixin, CreateView):
+    """
+    Представление регистрации на сайте с формой регистрации
+    """
+    form_class = UserRegisterForm
+    success_url = '/'
+    template_name = 'user_register.html'
+    success_message = 'Вы успешно зарегистрировались. Можете войти на сайт!'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Регистрация на сайте'
+        return context
+
+
+#для авторизации
+
+class UserLoginView(SuccessMessageMixin, LoginView):
+    """
+    Авторизация на сайте
+    """
+    form_class = UserLoginForm
+    template_name = 'user_login.html'
+    next_page = '/'
+    success_message = 'Добро пожаловать на сайт!'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Авторизация на сайте'
+        return context
+
+
+#деавторизация
+
+class UserLogoutView(LogoutView):
+    """
+    Выход с сайта
+    """
+    next_page = '/'
 
 
