@@ -4,7 +4,7 @@
     Your shopping cart
 {% endblock %}
 {% block content %}
-    <h1>Your shopping cart</h1>
+    <h1>Ваша корзина покупок</h1>
     <table class="cart">
         <thead>
         <tr>
@@ -46,9 +46,9 @@
         </tbody>
     </table>
     <p class="text-right">
-        <a href="{% url 'shop:product_list' %}" class="button light">Continue shopping</a>
+        <a href="{% url 'shop:product_list' %}" class="button light">Продолжить покупки</a>
         <a href="{% url 'orders:order_create' %}" class="button">
-            Checkout
+            Оформить заказ
         </a>
     </p>
 {% endblock %}

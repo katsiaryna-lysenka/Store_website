@@ -19,6 +19,20 @@
         width: 300px;
         height: 300px;
       }
+      #auth {
+        text-align: center;
+        margin: auto;
+        line-height: 100%;
+      }
+      header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      .auth {
+        margin: 10px;
+      }
     </style>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -29,29 +43,35 @@
   <body>
     <header>
       <a href="/" class="logo">Prosto.hand.made</a>
-    </header>
-      <div align='right' class="cart">
-    {% with total_items=cart|length %}
-        {% if cart|length > 0 %}
-            Your cart:
-            <a href="{% url 'cart:cart_detail' %}">
-                {{ total_items }} item{{ total_items|pluralize }},
-                ${{ cart.get_total_price }}
-            </a>
-        {% else %}
-            Your cart is empty.
-        {% endif %}
-    {% endwith %}
-      </div>
-<div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="news">
-            {% include 'news.html' %}
+        {% if request.path == '/' %}
+            <div id="auth">
+              <a href="login/" class="auth">Авторизация</a>
+              <a href="logout/" class="auth">Выйти</a>
             </div>
+        {% endif %}
+      <div align='right' class="cart">
+        {% with total_items=cart|length %}
+            {% if cart|length > 0 %}
+                Ваша корзина:
+                <a href="{% url 'cart:cart_detail' %}">
+                    {{ total_items }} товара{{ total_items|pluralize }},
+                    ${{ cart.get_total_price }}
+                </a>
+            {% else %}
+                Ваша корзина пуста
+            {% endif %}
+        {% endwith %}
+      </div>
+    </header>
+    <div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="news">
+            {% include 'news.html' %}
+          </div>
         </div>
-</div>
-</div>
+      </div>
+    </div>
     <main class="content">
       <div class="categories">
         {% block categories %}{% endblock %}
