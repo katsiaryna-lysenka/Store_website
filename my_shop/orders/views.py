@@ -30,15 +30,19 @@ def order_create(request):
             cart.clear()
             form = OrderCreateForm()
             if request.POST.get('pickup_or_delivery') == 'delivery':
-                return render(request, 'created_delivery.html', {'message': 'Спасибо за заказ'})
+                return render(request, 'created_delivery.html',
+                              {'order': order, 'username': request.user.username, 'order_time': order.created,
+                               'delivery_method': 'Доставка', 'delivery_address': order.address,
+                               'message': 'Спасибо за заказ'})
             else:
-                return render(request, 'created_pickup.html', {'message': 'Ваш заказ в пути'})
+                return render(request, 'created_pickup.html', {'order': order, 'username': request.user.username, 'order_time': order.created, 'delivery_method': 'Самовывоз', 'message': 'Ваш заказ в пути'})
     else:
         form = OrderCreateForm()
     form.fields['pickup_or_delivery'] = forms.ChoiceField(choices=[('pickup', 'Самовывоз'), ('delivery', 'Доставка')],
                                                           widget=forms.RadioSelect)
     return render(request, 'orders/order/create.html',
                   {'cart': cart, 'form': form})
+
 
 
 @receiver(post_save, sender=User)

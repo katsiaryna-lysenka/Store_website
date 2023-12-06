@@ -1,8 +1,18 @@
 {% extends "shop/base.html" %}
 
-{% block title %}Thank you{% endblock %}
+{% block title %}Спасибо{% endblock %}
 
 {% block content %}
     <h1>Спасибо!</h1>
-    <p>Ваш заказ успешно создан и уже находится в пути! Отследить заказ можете по ссылке:</p>
+    <p>Ваш заказ №{{ order.id }} успешно создан и уже находится в пути!</p>
+    <p>Имя пользователя: {{ order.first_name }} {{ order.last_name }}</p>
+    <p>Предметы доставки:</p>
+        <ul>
+            {% for item in order.items.all %}
+            <li>{{ item.product.name }} (Количество: {{ item.quantity }})</li>
+            {% endfor %}
+        </ul>
+    <p>Дата заказа: {{ order.created }}</p>
 {% endblock %}
+
+

@@ -5,11 +5,15 @@
     {% for order in orders %}
       <li>
         <h3>Заказ №{{ order.id }}</h3>
-        <p>Имя пользователя: {{ order.user.username }}</p>
-        <p>Дата заказа: {{ order.date }}</p>
-        <p>Тип доставки: {{ order.delivery_type }}</p>
-        <p>Адрес доставки: {{ order.delivery_address }}</p>
-        <!-- Добавьте здесь дополнительные детали заказа -->
+        <p>Имя пользователя: {{ order.first_name }} {{ order.last_name }}</p>
+        <p>Дата заказа: {{ order.created }}</p>
+        <p>Предметы доставки:</p>
+        <ul>
+            {% for item in order.items.all %}
+            <li>{{ item.product.name }} (Количество: {{ item.quantity }})</li>
+            {% endfor %}
+        </ul>
+        <p>Адрес доставки: {{ order.address }}</p>
       </li>
     {% endfor %}
     </ul>
