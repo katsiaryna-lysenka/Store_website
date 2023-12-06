@@ -1,12 +1,12 @@
 from django.shortcuts import render, get_object_or_404
 from newsapi.newsapi_client import NewsApiClient
 
+from . import models
 from .models import Category, Product, Comment
 from cart.forms import CartAddProductForm, CommentForm
 
 #для регистрации
 from django.views.generic import CreateView
-from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from .forms import UserRegisterForm, UserLoginForm
 
@@ -124,5 +124,8 @@ class UserLogoutView(LogoutView):
     Выход с сайта
     """
     next_page = '/'
+
+
+
 
 

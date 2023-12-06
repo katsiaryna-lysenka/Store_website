@@ -43,6 +43,15 @@
   <body>
     <header>
       <a href="/" class="logo">Prosto.hand.made</a>
+        {% if request.user.is_authenticated %}
+            <div id="auth">
+              <a href="orders/my_orders/" class="auth">Мои Заказы</a>
+            </div>
+        {% else %}
+            <div id="auth">
+              <a href="login/" class="auth">Авторизация</a>
+            </div>
+        {% endif %}
         {% if request.path == '/' %}
             <div id="auth">
               <a href="login/" class="auth">Авторизация</a>

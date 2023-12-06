@@ -1,0 +1,20 @@
+{% block content %}
+  <h2>Мои заказы</h2>
+  {% if orders %}
+    <ul>
+    {% for order in orders %}
+      <li>
+        <h3>Заказ №{{ order.id }}</h3>
+        <p>Имя пользователя: {{ order.user.username }}</p>
+        <p>Дата заказа: {{ order.date }}</p>
+        <p>Тип доставки: {{ order.delivery_type }}</p>
+        <p>Адрес доставки: {{ order.delivery_address }}</p>
+        <!-- Добавьте здесь дополнительные детали заказа -->
+      </li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p>У вас пока нет заказов.</p>
+  {% endif %}
+{% endblock %}
+

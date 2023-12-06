@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from shop.models import Product
 
@@ -36,3 +37,13 @@ class OrderItem(models.Model):
 
     def get_cost(self):
         return self.price * self.quantity
+
+
+class UserOrders(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='userorders')
+    orders = models.ManyToManyField(Order)
+
+    def __str__(self):
+        return self.user.username
+
+
