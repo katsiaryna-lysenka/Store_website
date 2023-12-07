@@ -1,52 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<title>Авторизация пользователя</title>
+<head>
+    <title>Авторизация пользователя</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+        .card-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .btn {
+            display: inline-block;
+            color: #fff;
+            background-color: #333;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
 
-{% block content %}
-
-    <div class="card mb-3 border-0 nth-shadow">
-
-        <div class="card-body">
-
-            <div class="card-title nth-card-title">
-
+<body>
+    {% block content %}
+    <div class="container">
+        <div class="card">
+            <div class="card-title">
                 <h4>Авторизация на сайте</h4>
-
             </div>
-
             <form method="post" action="">
-
                 {% csrf_token %}
-
                 {{ form.as_p }}
-
-                <div class="d-grid gap-2 d-md-block mt-2">
-
-                <button type="submit" class="btn btn-dark">Авторизоваться</button>
-
-             </div>
-
+                <button type="submit" class="btn">Авторизоваться</button>
             </form>
-
         </div>
-
-    </div>
-
-    <div class="card mb-3 border-0 nth-shadow">
-
-        <div class="card-body">
-
-            <div class="card-title nth-card-title">
-
-                <a href="http://127.0.0.1:8000/register/"><h4>Новый пользователь?</h4></a>
-
+        <div class="card">
+            <div class="card-title">
+                <a href="http://127.0.0.1:8000/register/" class="btn">Новый пользователь?</a>
             </div>
-
         </div>
-
     </div>
+    {% endblock %}
+</body>
 
-{% endblock %}
 </html>
 

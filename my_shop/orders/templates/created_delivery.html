@@ -3,16 +3,19 @@
 {% block title %}Спасибо{% endblock %}
 
 {% block content %}
-    <h1>Спасибо!</h1>
-    <p>Ваш заказ №{{ order.id }} успешно создан и уже находится в пути!</p>
-    <p>Имя пользователя: {{ order.first_name }} {{ order.last_name }}</p>
-    <p>Предметы доставки:</p>
-        <ul>
+    <h1 style="text-align: center; margin-top: 20px;">Спасибо!</h1>
+    <div style="width: 80%; margin: auto; border: 1px solid #ccc; border-radius: 5px; padding: 20px; margin-bottom: 20px;">
+        <p style="margin-bottom: 10px;">Ваш заказ №{{ order.id }} успешно создан и уже находится в пути!</p>
+        <p style="margin-bottom: 10px;">Имя пользователя: {{ order.first_name }} {{ order.last_name }}</p>
+        <p style="margin-bottom: 10px;">Предметы доставки:</p>
+        <ul style="list-style-type: none; padding: 0;">
             {% for item in order.items.all %}
-            <li>{{ item.product.name }} (Количество: {{ item.quantity }})</li>
+            <li style="border-bottom: 1px solid #ccc; padding: 10px 0;">{{ item.product.name }} (Количество: {{ item.quantity }})</li>
             {% endfor %}
         </ul>
-    <p>Дата заказа: {{ order.created }}</p>
+        <p style="margin-bottom: 10px;">Дата заказа: {{ order.created }}</p>
+    </div>
 {% endblock %}
+
 
 

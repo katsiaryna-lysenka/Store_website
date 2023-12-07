@@ -4,8 +4,6 @@
   <meta charset="utf-8">
   <title></title>
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<!-- Optional theme -->
 <style>
   .right {
     text-align: right;
@@ -15,6 +13,21 @@
   .right:hover {
     text-decoration: none;
     color: black;
+  }
+  .container {
+    width: 80%;
+    margin: auto;
+  }
+  .news {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 20px;
+  }
+  .news img {
+    display: block;
+    margin: 0 auto;
+    max-width: 50%;
   }
 </style>
 </head>
@@ -34,7 +47,7 @@
     <div class="news">
         <h2>{{ nws }}</h2>
         <p>{{ dt }}</p>
-        <img src="{{ im }}" alt="{{ nws }}" class="mx-auto d-block" style="max-width: 50%; height: auto;">
+        <img src="{{ im }}" alt="{{ nws }}">
         <p>{{ dsc }}</p>
     </div>
 {% endfor %}

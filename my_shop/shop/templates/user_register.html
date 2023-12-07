@@ -1,33 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<head>
+    <title>Регистрация на сайте</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+        .card-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .btn {
+            display: inline-block;
+            color: #fff;
+            background-color: #333;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
 
-
-
-{% block content %}
-
-    <div class="card mb-3 border-0 nth-shadow">
-
-        <div class="card-body">
-
-            <div class="card-title nth-card-title">
-
-                <h4>Регистрация на сайте</h4>
-
-            </div>
-
-            <form method="post" action="" enctype="application/x-www-form-urlencoded">
-
-                {% csrf_token %}
-
-                {{ form.as_p }}
-
-                <button type="submit" class="btn btn-dark mt-2">Зарегистрироваться</button>
-
-            </form>
-
+<body>
+    {% block content %}
+    <div class="card">
+        <div class="card-title">
+            <h4>Регистрация на сайте</h4>
         </div>
-
+        <form method="post" action="" enctype="application/x-www-form-urlencoded">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn">Зарегистрироваться</button>
+        </form>
     </div>
+    {% endblock %}
+</body>
 
-{% endblock %}
+</html>

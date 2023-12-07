@@ -3,22 +3,23 @@
 {% block title %}Checkout{% endblock %}
 
 {% block content %}
-    <h1>Checkout</h1>
-    <div class="order-info">
-        <h3>Your order</h3>
-        <ul>
+    <h1 style="text-align: center; margin-top: 20px;">Checkout</h1>
+    <div class="order-info" style="width: 80%; margin: auto; border: 1px solid #ccc; border-radius: 5px; padding: 20px; margin-bottom: 20px;">
+        <h3 style="margin-bottom: 10px;">Your order</h3>
+        <ul style="list-style-type: none; padding: 0;">
             {% for item in user.cart %}
-                <li>
+                <li style="border-bottom: 1px solid #ccc; padding: 10px 0;">
                     {{ item.quantity }}x {{ item.product.name }}
-                    <span>${{ item.total_price }}</span>
+                    <span style="float: right;">${{ item.total_price }}</span>
                 </li>
             {% endfor %}
         </ul>
-        <p>Total: ${{ user.cart.get_total_price }}</p>
+        <p style="text-align: right; font-weight: bold;">Total: ${{ user.cart.get_total_price }}</p>
     </div>
-    <form action="." method="post" class="order-form">
+    <form action="." method="post" class="order-form" style="width: 80%; margin: auto;">
         {{ form.as_p }}
-        <p><input type="submit" value="Place order"></p>
+        <p><input type="submit" value="Place order" style="padding: 10px 20px; border: none; background-color: #333; color: #fff; cursor: pointer;"></p>
         {% csrf_token %}
     </form>
 {% endblock %}
+
