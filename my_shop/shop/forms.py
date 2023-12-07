@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
 
+
 class UserRegisterForm(UserCreationForm):
     """
     Переопределенная форма регистрации пользователей
@@ -54,4 +55,5 @@ class UserLoginForm(AuthenticationForm):
                 'class': 'form-control',
                 'autocomplete': 'off'
             })
+
 

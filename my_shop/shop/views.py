@@ -1,7 +1,7 @@
+from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render, get_object_or_404
 from newsapi.newsapi_client import NewsApiClient
 
-from . import models
 from .models import Category, Product, Comment
 from cart.forms import CartAddProductForm, CommentForm
 
@@ -9,6 +9,7 @@ from cart.forms import CartAddProductForm, CommentForm
 from django.views.generic import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
 from .forms import UserRegisterForm, UserLoginForm
+from typing import Optional
 
 
 #для авторизации и деавторизации
@@ -16,10 +17,10 @@ from .forms import UserRegisterForm, UserLoginForm
 from django.contrib.auth.views import LoginView, LogoutView
 
 
-def product_list(request, category_slug=None):
-    category = None
+def product_list(request: HttpRequest, category_slug: Optional[str] = None) -> HttpResponse:
+    category: Optional[Category] = None
     categories = Category.objects.all()
-    products = Product.objects.filter(available=True)
+    products = Product.objects.filter(available=True).select_related('category')
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(category=category)
@@ -32,7 +33,7 @@ def product_list(request, category_slug=None):
 
 #Переделала для создания комментариев
 
-def product_detail(request, id, slug):
+def product_detail(request: HttpRequest, id: int, slug: str) -> HttpResponse:
     product = get_object_or_404(Product,
                                 id=id,
                                 slug=slug,
@@ -60,27 +61,22 @@ def product_detail(request, id, slug):
                   'comments': comments,
                   'comment_form': comment_form})
 
+
 #Переделала для создания новостного блога
 
 
-def news(request):
+def news(request: HttpRequest) -> HttpResponse:
     newsapi = NewsApiClient(api_key='4399405a879a4684a406a6815b50d7ea')
     top = newsapi.get_top_headlines(language='en')
 
     articles = top['articles']
-    mylist = []
+    mylist = [(article['title'], article['description'], article['urlToImage'], article['publishedAt']) for article in articles]
 
-    for article in articles:
-        title = article['title']
-        description = article['description']
-        image_url = article['urlToImage']
-        published_at = article['publishedAt']
-        mylist.append((title, description, image_url, published_at))
-
-    if len(mylist) == 0:
+    if not mylist:
         return render(request, 'news.html', context={"error": "No news found."})
     else:
         return render(request, 'news.html', context={"mylist": mylist})
+
 
 
 #для регистрации

@@ -1,8 +1,8 @@
-pillow~=10.0.1
-pip~=23.3
-wheel~=0.41.2
-setuptools~=68.0.0
-django~=4.1
-sqlparse~=0.4.4
-requests~=2.31.0
-newsapi-python~=0.2.7
+ pillow~=10.0.1
+ pip~=23.3
+ wheel~=0.41.2
+ setuptools~=68.0.0
+ django~=4.1
+ sqlparse~=0.4.4
+ requests~=2.31.0
+ newsapi-python~=0.2.7

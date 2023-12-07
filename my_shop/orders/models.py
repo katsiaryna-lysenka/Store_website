@@ -20,7 +20,7 @@ class Order(models.Model):
         verbose_name_plural = 'Заказы'
 
     def __str__(self):
-        return 'Order {}'.format(self.id)
+        return f'Order {self.id}'
 
     def get_total_cost(self):
         return sum(item.get_cost() for item in self.items.all())
@@ -33,14 +33,14 @@ class OrderItem(models.Model):
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return '{}'.format(self.id)
+        return str(self.id)
 
     def get_cost(self):
         return self.price * self.quantity
 
 
 class UserOrders(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='userorders')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_orders')
     orders = models.ManyToManyField(Order)
 
     def __str__(self):

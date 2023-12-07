@@ -10,8 +10,6 @@ class CartAddProductForm(forms.Form):
 
 
 #Создала для комментариев
-
-
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
@@ -19,4 +17,7 @@ class CommentForm(forms.ModelForm):
         widgets = {
             'post': forms.Select(attrs={'required': True}),
         }
+
+
+
 

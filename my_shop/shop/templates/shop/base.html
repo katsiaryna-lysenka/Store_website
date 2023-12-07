@@ -6,32 +6,36 @@
     <title>{% block title %}My shop{% endblock %}</title>
     <link href="{% static 'css/base.css' %}" rel="stylesheet" />
     <style>
-      .content > * {
-        display: inline-block;
+a {
+        color: black !important;
+        text-decoration: none !important;
       }
-      .categories {
-        position: absolute;
-        top: 0%;
-        right: 0%;
-        transform: translate(-50%, -50%);
+      .header-item {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0 10px;
       }
       img {
         width: 300px;
         height: 300px;
       }
-      #auth {
-        text-align: center;
-        margin: auto;
-        line-height: 100%;
-      }
       header {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
-        flex-direction: column;
+        background-color: lightblue;
+        padding: 10px;
       }
-      .auth {
-        margin: 10px;
+      #auth {
+        order: 2;
+        margin-left: auto;
+      }
+      .cart {
+        order: 3;
+        margin-left: auto;
+        }
+      .logo {
+        order: 1;
       }
     </style>
     <script>
@@ -42,27 +46,24 @@
   </head>
   <body>
     <header>
-      <a href="/" class="logo">Prosto.hand.made</a>
+      <a href="/" class="header-item logo">Prosto.hand.made</a>
         {% if request.user.is_authenticated %}
-            {% if request.path == '/' %}
-                <div id="auth">
-                  <a href="orders/my_orders/" class="auth">Мои Заказы</a>
-                </div>
-            {% endif %}
+            <div id="auth" class="header-item">
+             {% if request.path == "/" %}
+                <a href="orders/my_orders/" class="auth">Мои Заказы</a>
+                <a href="logout/" class="auth">Выйти</a>
+              {% endif %}
+            </div>
         {% else %}
-            <div id="auth">
-              <a href="login/" class="auth">Авторизация</a>
+            <div id="auth" class="header-item">
+              {% if request.path == "/" %}
+                <a href="login/" class="auth">Авторизация</a>
+              {% endif %}
             </div>
         {% endif %}
-        {% if request.path == '/' %}
-            <div id="auth">
-              <a href="login/" class="auth">Авторизация</a>
-              <a href="logout/" class="auth">Выйти</a>
-            </div>
-        {% endif %}
-      <div align='right' class="cart">
+      <div align='right' class="header-item cart">
         {% with total_items=cart|length %}
-            {% if cart|length > 0 %}
+            {% if total_items > 0 %}
                 Ваша корзина:
                 <a href="{% url 'cart:cart_detail' %}">
                     {{ total_items }} товара{{ total_items|pluralize }},
@@ -93,3 +94,5 @@
     </main>
   </body>
 </html>
+
+

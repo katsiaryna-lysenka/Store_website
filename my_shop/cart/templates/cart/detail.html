@@ -4,23 +4,23 @@
     Your shopping cart
 {% endblock %}
 {% block content %}
-    <h1>Ваша корзина покупок</h1>
-    <table class="cart">
+    <h1 style="text-align: left; font-size: 1.5em;">Ваша корзина покупок</h1>
+    <table class="cart" style="margin-right: auto; margin-top: 0;">
         <thead>
         <tr>
-            <th>Image</th>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Remove</th>
-            <th>Unit price</th>
-            <th>Price</th>
+            <th>Изображение</th>
+            <th>Товар</th>
+            <th>Количество</th>
+            <th>Удалить</th>
+            <th>Стоимость за штуку</th>
+            <th>Общая стоимость</th>
         </tr>
         </thead>
         <tbody>
         {% for item in cart %}
             {% with product=item.product %}
                 <tr>
-                    <td>
+                    <td style="text-align: center;">
                         <a href="{{ product.get_absolute_url }}">
                             <img src="
                                 {% if product.image %}
@@ -30,16 +30,16 @@
                                 {% endif %}">
                         </a>
                     </td>
-                    <td>{{ product.name }}</td>
-                    <td>{{ item.quantity }}</td>
-                    <td><a href="{% url 'cart:cart_remove' product.id%}">Remove</a></td>
-                    <td class="num">${{ item.price }}</td>
-                    <td class="num">${{ item.total_price }}</td>
+                    <td style="text-align: center;">{{ product.name }}</td>
+                    <td style="text-align: center;">{{ item.quantity }}</td>
+                    <td style="text-align: center;"><a href="{% url 'cart:cart_remove' product.id%}">Удалить</a></td>
+                    <td class="num" style="text-align: center;">${{ item.price }}</td>
+                    <td class="num" style="text-align: center;">${{ item.total_price }}</td>
                 </tr>
             {% endwith %}
         {% endfor %}
         <tr class="total">
-            <td>Total</td>
+            <td>Итого</td>
             <td colspan="4"></td>
             <td class="num">${{ cart.get_total_price }}</td>
         </tr>
@@ -52,3 +52,4 @@
         </a>
     </p>
 {% endblock %}
+
