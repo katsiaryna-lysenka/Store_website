@@ -1,18 +1,21 @@
 Разработка интернет-магазина. Реализована клиентская часть сервиса и интерфейс администрирования.
 Для запуска проекта необходимо:
 
-    Установить зависимости:
+Установить зависимости:
 
-pip install -r requirements.txt
+    pip install -r requirements.txt
+
 
 Выполнить следующие команды:
 
-    Команда для создания миграций приложения для базы данных
+Команда для создания миграций приложения для базы данных:
+
+    python manage.py makemigrations 
+    python manage.py migrate
     
-python manage.py makemigrations
-python manage.py migrate
+Команда для запуска приложения:
 
-    Команда для запуска приложения:
+    python manage.py runserver
 
-python manage.py runserver
+
 
